@@ -20,6 +20,7 @@ client.Dispatcher.on(Events.GATEWAY_READY, e => {
   console.log(colors.ok("Connected as: " + client.User.username));
   console.log(colors.info("The bot is currently in " + client.Guilds.length + " servers, with " + client.Users.length + " users."));
   setGame();
+  client.User.setStatus("dnd");
   client.autoReconnect.enable();
 });
 client.Dispatcher.on(Events.MESSAGE_CREATE, e => {
