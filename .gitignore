@@ -4,3 +4,7 @@
 dbots.js
 run.js
 assets/icon/
+node_modules
+qt*
+ff*
+readme.txt

@@ -27,6 +27,7 @@ client.Dispatcher.on(Events.MESSAGE_CREATE, e => {
 if (e.message.content.startsWith(prefix)) {
   var command = e.message.content.slice(5)
   var commandName = command.split(" ")[0];
+if (commandName.includes(".") || commandName.includes("/")) return console.warn(`${e.message.author.username}#${e.message.author.discriminator} tried to load command files from other directories!!!!!!!!!\nHis ID is ${e.message.author.id}`);
   try {var command = require(`./assets/cmds/${commandName}.js`)(e,client, command);}
   catch(err) {
       try{
