@@ -1,19 +1,16 @@
-module.exports = function(param,clientArg, args) {
-    var sliceArgs = args.slice(10)
-    console.log(sliceArgs)
+module.exports = function(param,clientArg, args, sounds) {
     try {
-   if(param.message.member.getVoiceChannel() != null && sliceArgs != "") {
-param.message.member.getVoiceChannel().join(false,false).then(voice =>{
-    var encoder = voice.voiceConnection.createExternalEncoder({type: "ffmpeg", source: "Pyro_battlecry0"+sliceArgs+".wav"});
-    encoder.once("end", () => {console.log("Sucessfully played Pyro_battlecry0"+sliceArgs+".wav");
-voice.voiceConnection.disconnect()
+   if(param.member.getVoiceChannel() != null && args != "" && sounds["Pyro_battlecry0"+args+".wav"]) {
+param.member.getVoiceChannel().join().then(voice =>{
+    voice.play(sounds.resolveSound("Pyro_battlecry0"+args+".wav"));
+    voice.on("end", () => {console.log("Sucessfully played Pyro_battlecry0"+args+".wav");
+voice.disconnect()
 });
-    var stream = encoder.play()
-
 })
    }
-       param.message.channel.sendMessage("*mmph*");
+       param.channel.sendMessage("*mmph*");
     }catch(err) {
         return err;
     }
 }
+module.exports.isCmd = true

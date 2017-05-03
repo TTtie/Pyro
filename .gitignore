@@ -8,3 +8,5 @@ node_modules
 qt*
 ff*
 readme.txt
+config.json
+sounds

@@ -1,14 +1,14 @@
-module.exports = function(param,clientArg, args) {
-    var sliceArgs = args.slice(6)
+module.exports = function(param,clientArg, args, sounds) {
+    var sliceArgs = args
     console.log(sliceArgs)
     try {
-   if(param.message.member.getVoiceChannel() != null && sliceArgs != "") {
+   if(param.message.member.getVoiceChannel() != null && sliceArgs != "" && sounds["Pyro_taunts0"+sliceArgs+".wav"]) {
 param.message.member.getVoiceChannel().join(false,false).then(voice =>{
-    var encoder = voice.voiceConnection.createExternalEncoder({type: "ffmpeg", source: "Pyro_taunts0"+sliceArgs+".wav"});
-    encoder.once("end", () => {console.log("Sucessfully played Pyro_taunts0"+sliceArgs+".wav");
-voice.voiceConnection.disconnect()
+    voice.play(sounds.resolveSound("Pyro_taunts0"+sliceArgs+".wav"));
+    voice.on("end", () => {console.log("Sucessfully played Pyro_taunts0"+sliceArgs+".wav");
+voice.disconnect()
 });
-    var stream = encoder.play()
+    
 
 })
    }
@@ -17,3 +17,4 @@ voice.voiceConnection.disconnect()
         return err;
     }
 }
+module.exports.isCmd = true

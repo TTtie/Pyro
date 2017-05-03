@@ -1,12 +1,12 @@
-module.exports = function(param,clientArg, args) {
+module.exports = function(param,clientArg, args, sounds) {
     try {
    if(param.message.member.getVoiceChannel() != null) {
 param.message.member.getVoiceChannel().join(false,false).then(voice =>{
-    var encoder = voice.voiceConnection.createExternalEncoder({type: "ffmpeg", source: "Pyro_thanksfortheheal01.wav"});
-    encoder.once("end", () => {console.log("Sucessfully played Pyro_thanksfortheheal01.wav");
-voice.voiceConnection.disconnect()
+    voice.play(sounds.resolveSound("Pyro_thanksfortheheal01.wav"));
+    voice.on("end", () => {console.log("Sucessfully played Pyro_thanksfortheheal01.wav");
+voice.disconnect()
 });
-    var stream = encoder.play()
+    var stream = voice.play()
 
 })
    }
@@ -15,3 +15,4 @@ voice.voiceConnection.disconnect()
         return err;
     }
 }
+module.exports.isCmd = true
