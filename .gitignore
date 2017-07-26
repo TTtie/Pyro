@@ -1,7 +1,6 @@
 *.mp3 
 *.exe 
 *.wav
-dbots.js
 run.js
 assets/icon/
 node_modules
@@ -10,3 +9,4 @@ ff*
 readme.txt
 config.json
 sounds
+dorun.cmd

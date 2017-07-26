@@ -4,7 +4,11 @@ var colors = require("colors/safe")
 const pol = require("./polyfillinator")
 const token = require("./config.json").token
 const sounds = require("./sounds")
-var client = new Eris(token);
+var client = new Eris(token,{
+    getAllUsers:true
+});
+
+process.on("unhandledRejection", (p,r) => "")
 let cmds = {};
 let loadAll = function () {
     let fa = fs.readdirSync("./assets/cmds");
@@ -30,7 +34,7 @@ let loadAll = function () {
     }
 }
 function listBotColls() {
-    return client.guilds.filter(g => g.members.filter(fn => fn.bot) >= g.members.filter(fn => fn.bot == false))
+    return client.guilds.filter(g => ((g.members.filter(fn => fn.bot).length / g.memberCount) * 100) >= 75 )
 }
 colors.setTheme({
     info: 'cyan',
