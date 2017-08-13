@@ -4,11 +4,20 @@ var colors = require("colors/safe")
 const pol = require("./polyfillinator")
 const token = require("./config.json").token
 const sounds = require("./sounds")
-var client = new Eris(token,{
-    getAllUsers:true
+var client = new Eris(token, {
+    getAllUsers: true
 });
 
-process.on("unhandledRejection", (p,r) => "")
+process.on("unhandledRejection", (p, r) => "")
+Object.defineProperty(Eris.Guild.prototype, "defaultChannel", {
+    get: function () {
+        if (this.channels.filter((c) => c.type == 0).length == 0) return null;
+        const defaultChannel = this.channels.filter((c) => c.type == 0 && c.permissionsOf(this.shard.client.user.id).has("readMessages")).sort((a, b) => a.position - b.position)[0];
+        if (!defaultChannel) return null;
+        return this.channels.get(defaultChannel.id);
+    },
+    set: function() {}
+})
 let cmds = {};
 let loadAll = function () {
     let fa = fs.readdirSync("./assets/cmds");
@@ -34,7 +43,7 @@ let loadAll = function () {
     }
 }
 function listBotColls() {
-    return client.guilds.filter(g => ((g.members.filter(fn => fn.bot).length / g.memberCount) * 100) >= 75 )
+    return client.guilds.filter(g => ((g.members.filter(fn => fn.bot).length / g.memberCount) * 100) >= 75)
 }
 colors.setTheme({
     info: 'cyan',
