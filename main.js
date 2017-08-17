@@ -83,7 +83,7 @@ function dbots() {
     require("./dbots.js").post(client.guilds.size)
 }
 function setGame() {
-    var game = { name: "Mmph " + prefix + "help" };
+    var game = { name: "Mmph " + prefix + "help", type: 0 };
     client.editStatus("online", game);
 }
 client.on("guildCreate", gcr => {
