@@ -1,4 +1,5 @@
 {
     "token": "TOKEN",
-    "dbotstoken": "TOKEN"
+    "dbotstoken": "TOKEN",
+    "shards": 2
 }
