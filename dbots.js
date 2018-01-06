@@ -1,28 +1,33 @@
-module.exports.post = function(guilds) {
-    var https = require('https');
-  const token = require("./config.json").dbotstoken
-  var options = {
-  hostname: 'bots.discord.pw',
-  path: '/api/bots/242249568794836993/stats',
-  method: 'POST',
-  headers: {
-      'Content-Type': 'application/json',
-      'Authorization': token
-  }
-};
-var req = https.request(options, function(res) {
-  console.log('Status: ' + res.statusCode);
- // console.log('Headers: ' + JSON.stringify(res.headers));
-  res.setEncoding('utf8');
-  res.on('data', function (body) {
-    console.log('Body: ' + body);
-  });
-});
-req.on('error', function(e) {
-  console.log('problem with request: ' + e.message);
-});
-// write data to request body
-//req.write(`{"shard_id": ${shards}, "shard_count": ${shardcount}, "server_count": ${guilds} }`);
-req.write(`{"server_count": ${guilds} }`);
-req.end();
+module.exports.post = function (guilds, shard, shards) {
+    return new Promise((rs, rj) => {
+        const https = require('https');
+        const token = require("./config.json").dbotstoken
+        const options = {
+            hostname: 'bots.discord.pw',
+            path: '/api/bots/242249568794836993/stats',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        };
+        const req = https.request(options, res => {
+            console.log('Status: ' + res.statusCode);
+            res.setEncoding('utf8');
+            res.on('data', body => {
+                console.log('Body: ' + body);
+            });
+            res.on("end", () => rj());
+        });
+        req.on('error', e => {
+            console.log('problem with request: ' + e.message);
+            rj(e);
+        });
+        req.write(JSON.stringify({
+            shard_id: shard,
+            shard_count: shards,
+            server_count: guilds
+        }));
+        req.end();
+    })
 }
