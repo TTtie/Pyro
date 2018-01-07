@@ -17,7 +17,7 @@ module.exports.post = function (guilds, shard, shards) {
             res.on('data', body => {
                 console.log('Body: ' + body);
             });
-            res.on("end", () => rj());
+            res.on("end", () => rs());
         });
         req.on('error', e => {
             console.log('problem with request: ' + e.message);
