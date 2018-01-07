@@ -17,6 +17,9 @@ const client = new Eris.Client(CLIENT_TOKEN, {
 
 
 process.on("unhandledRejection", (p, r) => "")
+process.on("uncaughtException", (err) => {
+    console.error(err);
+})
 require("./util/defaultChannelPolyfill")();
 let cmds = new Eris.Collection(Function);
 const loadAll = () => require("./util/commandLoad")(cmds);
@@ -44,6 +47,8 @@ client.on("ready", () => {
     loadAll();
     listBotColls().forEach(g => g.leave())
 }).on("messageCreate", msg => {
+    if (msg.author.bot) return;
+    if (!msg.channel.guild) return;
     if (msg.content.startsWith(prefix)) {
         const command = msg.content.slice(prefix.length)
         const [commandName, ...args] = command.split(" ");
