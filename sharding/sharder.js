@@ -14,7 +14,8 @@ class Sharder {
         this.IPC = new sipc(this);
         this.cluster = cluster;
         this.cluster.setupMaster({
-            exec: "client.js"
+            exec: "client.js",
+            windowsHide: true
         })
         this.shards = new Collection(Shard);
     }
