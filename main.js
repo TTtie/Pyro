@@ -10,7 +10,7 @@ sharder.IPC.on("ready", ({id, guilds}, cback) => {
 })
 
 sharder.IPC.on("sendGuilds", ({id, guilds}, cback) => {
-    require("./dbots").post(guilds, id, shards).then(() => cback(true)).catch(() => cback(false))
+    require("./dbots").post(guilds, id, shards).then(ok => cback(ok));
 })
 sharder.IPC.on("runCommand", ({id, name, args, guild, invoker}, cback) => {
     console.log(`${invoker} ran command ${name} on shard ${id} in a guild ${guild} with these arguments: ${args}`)
@@ -18,4 +18,3 @@ sharder.IPC.on("runCommand", ({id, name, args, guild, invoker}, cback) => {
 })
 
 sharder.start();
-Promise.all(sharder.broadcast("isReady", {})).then(console.log)

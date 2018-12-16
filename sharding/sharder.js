@@ -8,6 +8,7 @@ class Sharder {
         const client = new (require("eris").Client)(token, { restMode: true });
         if (!shards || typeof shards !== "number") {
             console.error("CRITICAL: I cannot get the number of shards. Please fill out your value correctly in config.json!")
+            process.exit(1);
         }
         this.token = token;
         this.shardCount = shards;
