@@ -5,7 +5,7 @@
   "main": "main.js",
   "dependencies": {
     "eris": "github:abalabahaha/eris#dev",
-    "process-as-promised": "^1.0.1"
+    "workers-as-promised": "github:tt-bot-dev/WorkersAsPromised"
   },
   "devDependencies": {},
   "scripts": {

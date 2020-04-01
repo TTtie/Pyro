@@ -6,7 +6,7 @@ class evt {
      */
     constructor(sharder) {
         this.sharder = sharder;
-        this.onEvents = new Map()
+        this.onEvents = new Map();
         this.onceEvents = new Map();
     }
 
@@ -17,7 +17,7 @@ class evt {
      * @returns {evt}
      */
     on(evt, cback) {
-        this.onEvents.set(evt, cback)
+        this.onEvents.set(evt, cback);
         return this;
     }
 
@@ -28,7 +28,7 @@ class evt {
      * @returns {evt}
      */
     on(evt, cback) {
-        this.onEvents.set(evt, cback)
+        this.onEvents.set(evt, cback);
         return this;
     }
 }

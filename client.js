@@ -1,13 +1,9 @@
-const {isWorker} = require("cluster");
-const fs = require("fs")
+const {isMainThread, 
+    workerData: { CLIENT_TOKEN, SHARD_ID, SHARD_COUNT }} = require("worker_threads");
 const Eris = require("eris");
-const pol = require("./polyfillinator")
+const pol = require("./polyfillinator");
 const sounds = require("./sounds");
-const { CLIENT_TOKEN } = process.env;
-let { SHARD_ID, SHARD_COUNT } = process.env;
-if (!isWorker) return console.log("Please start the bot using main.js")
-SHARD_ID = parseInt(SHARD_ID);
-SHARD_COUNT = parseInt(SHARD_COUNT);
+if (isMainThread) return console.log("Please start the bot using main.js");
 const client = new Eris.Client(CLIENT_TOKEN, {
     getAllUsers: true,
     firstShardID: SHARD_ID,
@@ -16,24 +12,24 @@ const client = new Eris.Client(CLIENT_TOKEN, {
 });
 
 
-process.on("unhandledRejection", (p, r) => "")
+process.on("unhandledRejection", (p, r) => "");
 process.on("uncaughtException", (err) => {
     console.error(err);
-})
+});
 require("./util/defaultChannelPolyfill")();
 let cmds = new Eris.Collection(Function);
 const loadAll = () => require("./util/commandLoad")(cmds);
 function listBotColls() {
-    return client.guilds.filter(g => ((g.members.filter(fn => fn.bot).length / g.memberCount) * 100) >= 75)
+    return client.guilds.filter(g => ((g.members.filter(fn => fn.bot).length / g.memberCount) * 100) >= 75);
 }
-const prefix = "Pyro-"
-client.IPC = new (require("process-as-promised"))(process);
+const prefix = "Pyro-";
+client.IPC = new (require("workers-as-promised"))();
 client.cmds = cmds;
 
 client.IPC.on("isReady", (_, cb) => {
     if (!client.shards.get(SHARD_ID)) cb(false);
     else cb(client.shards.get(SHARD_ID).ready);
-})
+});
 client.connect().then(() => 
     client.shards.get(SHARD_ID).on("disconnect", console.error));
 
@@ -42,15 +38,15 @@ client.on("ready", () => {
     client.IPC.send("ready", {
         id: SHARD_ID,
         guilds: client.guilds.size
-    })
+    });
     setGame();
     loadAll();
-    listBotColls().forEach(g => g.leave())
+    listBotColls().forEach(g => g.leave());
 }).on("messageCreate", msg => {
     if (msg.author.bot) return;
     if (!msg.channel.guild) return;
     if (msg.content.startsWith(prefix)) {
-        const command = msg.content.slice(prefix.length)
+        const command = msg.content.slice(prefix.length);
         const [commandName, ...args] = command.split(" ");
         const realArgs = args.join(" ");
         pol(msg);
@@ -62,25 +58,25 @@ client.on("ready", () => {
                     args: realArgs,
                     guild: `${msg.guild.name} (${msg.guild.id})`,
                     invoker: `${msg.author.username}#${msg.author.discriminator} (${msg.author.id})`
-                })
-                cmds.get(commandName)(msg, client, realArgs, sounds)
+                });
+                cmds.get(commandName)(msg, client, realArgs, sounds);
             } catch (e) {
-                console.error(e)
+                console.error(e);
             }
         }
     }
 
 }).on("guildCreate", guild => {
-    if (listBotColls().includes(guild)) return guild.leave()
-    dbots()
+    if (listBotColls().includes(guild)) return guild.leave();
+    dbots();
 }).on("guildDelete", () => {
-    dbots()
+    dbots();
 });
 function dbots() {
     client.IPC.send("sendGuilds", {
         id: SHARD_ID,
         guilds: client.guilds.size
-    }).then(success => success ? console.log("Successfully posted to DBots.") : console.log("Posting to DBots has resulted in an error."))
+    }).then(success => success ? console.log("Successfully posted to DBots.") : console.log("Posting to DBots has resulted in an error."));
 }
 function setGame() {
     client.editStatus("online", { name: `Type ${prefix}help | Shard ${SHARD_ID}`, type: 0 });

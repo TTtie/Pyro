@@ -44,6 +44,6 @@ module.exports = {
     "Pyro_thanksfortheheal01.wav": "Pyro_thanksfortheheal01.wav",
     "Pyro_thanksfortheteleporter01.wav": "Pyro_thanksfortheteleporter01.wav",
     resolveSound: function(sound) {
-        return `./sounds/${sound}`
+        return `./sounds/${sound}`;
     }
-}
+};
