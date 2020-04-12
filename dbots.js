@@ -51,11 +51,11 @@ module.exports = (guilds, shard, shards) => {
                         console.error(`${now}: ${latency}ms (${ratelimitBucket.latencyRef.latency}ms avg)`)
                         console.error(`${ratelimitBucket.remaining}/${ratelimitBucket.limit} left`)
                         console.error(`Reset ${ratelimitBucket.reset} (${ratelimitBucket.reset - now}ms left)`)
-                        if (resp.headers.get("retry-after")) {
+                        if (err.headers.get("retry-after")) {
                             setTimeout(() => {
                                 cb();
                                 module.exports(guilds, shard, shards).then(rs, rj);
-                            }, +resp.headers.get("retry-after"));
+                            }, +err.headers.get("retry-after"));
                             return;
                         } else {
                             cb();
