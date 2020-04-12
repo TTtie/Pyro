@@ -1,19 +1,16 @@
 "use strict";
 const { Event } = require("sosamba");
-class GuildJoinEvent extends Event {
+class GuildLeaveEvent extends Event {
     constructor(...args) {
         super(...args, {
-            name: "guildCreate"
+            name: "guildDelete"
         });
     }
-
-    async run(guild) {
-        if (this.sosamba.listBotColls().includes(guild))
-            guild.leave();
+    async run() {
         await this.sosamba.IPC.send("sendGuilds", {
             id: SHARD_ID,
             guilds: this.sosamba.guilds.size
         });
     }
 }
-module.exports = GuildJoinEvent;
+module.exports = GuildLeaveEvent;

@@ -7,17 +7,32 @@ global.console = new Logger({
 });
 const sharderClass = require("./lib/sharding/sharder");
 const sharder = new sharderClass(token, shards);
+const guildDataMap = new Map();
+let readyShards = 0;
+
+const doDBotsPost = () => {
+    dbotsPost(Array.from(guildDataMap.values()).reduce((a, b) => a + b))
+        .then(() => {
+            console.info("Successfully posted to DBots!");
+        }).catch(console.error);
+}
+
 sharder.IPC.on("ready", ({ id, guilds }, cback) => {
     console.info(`Shard ${id} is ready to serve ${guilds} guilds!`);
+    guildDataMap.set(id, guilds);
+    readyShards++;
+    if (readyShards === shards) {
+        doDBotsPost();
+        setTimeout(doDBotsPost, 1800000)
+    }
     cback();
 });
 
 sharder.IPC.on("sendGuilds", ({ id, guilds }, cback) => {
-    dbotsPost(guilds, id, shards).then(ok => cback(ok)).catch(err => {
-        cback();
-        console.error(err);
-    });
+    guildDataMap.set(id, guilds);
+    cback();
 });
+
 
 sharder.IPC.on("die", (_, cb) => {
     sharder.broadcast("GOAWAY");

@@ -6,7 +6,7 @@ const ratelimitBucket = new Bucket(1, {
     latency: 500,
     raw: new Array(10).fill(500),
 });
-module.exports = (guilds, shard, shards) => {
+module.exports = guilds => {
     if (!dbotstoken) return Promise.resolve();
     return new Promise((rs, rj) => {
         ratelimitBucket.queue((cb) => {
@@ -16,8 +16,6 @@ module.exports = (guilds, shard, shards) => {
                     "Content-Type": "application/json",
                     "Authorization": dbotstoken
                 }).send({
-                    shardId: shard,
-                    shardCount: shards,
                     guildCount: guilds
                 }).toJSON().then(resp => {
                     const now = Date.now();
