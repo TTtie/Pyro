@@ -1,5 +1,6 @@
-const {isMainThread, 
-    workerData: { CLIENT_TOKEN, SHARD_ID, SHARD_COUNT }} = require("worker_threads");
+"use strict";
+const { isMainThread, 
+    workerData: { CLIENT_TOKEN, SHARD_ID, SHARD_COUNT } } = require("worker_threads");
 if (isMainThread) return console.log("Please start the bot using main.js");
 const { Logger } = require("sosamba");
 const { Colors } = require("sosamba/lib/Constants");
@@ -22,6 +23,6 @@ client.IPC.on("GOAWAY", () => {
     client.disconnect({
         reconnect: false
     });
-})
+});
 
 client.connect();

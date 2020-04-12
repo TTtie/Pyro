@@ -1,7 +1,5 @@
-const { Event, Logger } = require("sosamba");
-const { workerData: { SHARD_ID } } = require("worker_threads");
-const { prefix } = require("../config.json");
-
+"use strict";
+const { Event } = require("sosamba");
 class GuildJoinEvent extends Event {
     constructor(...args) {
         super(...args, {

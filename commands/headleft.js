@@ -1,3 +1,4 @@
+"use strict";
 const Command = require("../lib/VoiceBasedCommand");
 
 class HeadLeftCommand extends Command {

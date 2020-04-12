@@ -1,3 +1,4 @@
+"use strict";
 const Command = require("../lib/VoiceBasedCommand");
 const VoiceLineParser = require("../lib/VoiceLineParser");
 
@@ -9,14 +10,14 @@ class JeerCommand extends Command {
             argParser: new VoiceLineParser(sosamba, {
                 voiceLineName: "Pyro_jeers0{{LINE_ID}}.wav"
             })
-        })
+        });
     }
 
     async run(ctx, voiceFile) {
         await Promise.all([
             this.playSound(ctx, voiceFile),
             ctx.send("*mmmph*")
-        ])
+        ]);
     }
 }
 

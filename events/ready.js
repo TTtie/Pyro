@@ -1,17 +1,17 @@
+"use strict";
 const { Event, Logger } = require("sosamba");
 const { workerData: { SHARD_ID } } = require("worker_threads");
 const { prefix } = require("../config.json");
 
 class ReadyEvent extends Event {
-    posterLog = new Logger({
-        level: this.sosamba.options.log && this.sosamba.options.log.level ?
-            this.sosamba.options.log.level : undefined,
-        name: "DBLPoster"
-    });
-
     constructor(...args) {
         super(...args, {
             name: "ready"
+        });
+        this.posterLog = new Logger({
+            level: this.sosamba.options.log && this.sosamba.options.log.level ?
+                this.sosamba.options.log.level : undefined,
+            name: "DBLPoster"
         });
     }
 
@@ -22,12 +22,12 @@ class ReadyEvent extends Event {
         });
 
         await this.postToDBots();
-        setInterval(() => this.postToDBots(), 1800000)
+        setInterval(() => this.postToDBots(), 1800000);
 
         this.sosamba.editStatus("online", {
             name: `Type ${prefix}help | Shard ${SHARD_ID}`,
             type: 0
-        })
+        });
     }
 
     async postToDBots() {
@@ -37,7 +37,7 @@ class ReadyEvent extends Event {
         });
 
         if (success) {
-            this.posterLog.info("Successfully posted to DBots.")
+            this.posterLog.info("Successfully posted to DBots.");
         } else {
             this.posterLog.warn("Posting to DBots has resulted in an error.");
         }

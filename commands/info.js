@@ -1,5 +1,6 @@
+"use strict";
 const { Command } = require("sosamba");
-const { workerData: { SHARD_ID }} = require("worker_threads");
+const { workerData: { SHARD_ID } } = require("worker_threads");
 
 class AboutCommand extends Command {
     constructor(...args) {
