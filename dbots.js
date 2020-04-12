@@ -9,7 +9,7 @@ const ratelimitBucket = new Bucket(1, {
 module.exports = (guilds, shard, shards) => {
     if (!dbotstoken) return Promise.resolve();
     return new Promise((rs, rj) => {
-        ratelimitBucket.queue(() => {
+        ratelimitBucket.queue((cb) => {
             const b4 = Date.now();
             post("https://discord.bots.gg/api/v1/bots/242249568794836993/stats")
                 .set({
@@ -36,7 +36,7 @@ module.exports = (guilds, shard, shards) => {
                     } else {
                         ratelimitBucket.reset = now;
                     }
-
+                    cb();
                     rs(resp);
                 }, err => {
                     if (err.status === 429) {
@@ -51,6 +51,17 @@ module.exports = (guilds, shard, shards) => {
                         console.error(`${now}: ${latency}ms (${ratelimitBucket.latencyRef.latency}ms avg)`)
                         console.error(`${ratelimitBucket.remaining}/${ratelimitBucket.limit} left`)
                         console.error(`Reset ${ratelimitBucket.reset} (${ratelimitBucket.reset - now}ms left)`)
+                        if (resp.headers.get("retry-after")) {
+                            setTimeout(() => {
+                                cb();
+                                module.exports(guilds, shard, shards).then(rs, rj);
+                            }, +resp.headers.get("retry-after"));
+                            return;
+                        } else {
+                            cb();
+                            module.exports(guilds, shard, shards).then(rs, rj);
+                            return;
+                        }
                     }
                     rj(err);
                 });
