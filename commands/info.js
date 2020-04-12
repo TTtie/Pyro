@@ -27,7 +27,7 @@ class AboutCommand extends Command {
                     value: "https://discordapp.com/oauth2/authorize?client_id=242249568794836993&scope=bot"
                 }, {
                     name: "Other information",
-                    value: "[Support server](https://discord.gg/pGN5dMq)\n[Source code](https://github.com/tttie/pyro-bot)\n**We're not affliated with Valve Corp.**",
+                    value: "[Support server](https://discord.gg/pGN5dMq)\n[Source code](https://github.com/tttie/pyro)\n**We're not affliated with Valve Corp.**",
                 }],
                 color: 0xFB524F
             }
