@@ -13,7 +13,10 @@ sharder.IPC.on("ready", ({ id, guilds }, cback) => {
 });
 
 sharder.IPC.on("sendGuilds", ({ id, guilds }, cback) => {
-    dbotsPost(guilds, id, shards).then(ok => cback(ok));
+    dbotsPost(guilds, id, shards).then(ok => cback(ok)).catch(err => {
+        cback();
+        console.error(err);
+    });
 });
 
 sharder.IPC.on("die", (_, cb) => {
