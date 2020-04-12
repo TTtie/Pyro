@@ -4,10 +4,15 @@
   "description": "Pyro Bot for Discord",
   "main": "main.js",
   "dependencies": {
-    "eris": "github:abalabahaha/eris#dev",
+    "chainfetch": "^1.2.2",
+    "node-fetch": "^2.6.0",
+    "sosamba": "github:tt-bot-dev/sosamba",
     "workers-as-promised": "github:tt-bot-dev/WorkersAsPromised"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@tt-bot-dev/eslint-config": "^1.0.2",
+    "eslint": "^6.8.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

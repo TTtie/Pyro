@@ -1,5 +1,6 @@
 {
     "token": "TOKEN",
     "dbotstoken": "TOKEN",
-    "shards": 2
+    "shards": 2,
+    "prefix": "Pyro-"
 }

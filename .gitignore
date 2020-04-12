@@ -4,10 +4,5 @@
 run.js
 assets/icon/
 node_modules
-qt*
-ff*
-readme.txt
-config.json
-config.json3
+config.json*
 sounds
-dorun.cmd
