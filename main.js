@@ -23,7 +23,7 @@ sharder.IPC.on("ready", ({ id, guilds }, cback) => {
     readyShards++;
     if (readyShards === shards) {
         doDBotsPost();
-        setTimeout(doDBotsPost, 1800000)
+        setInterval(doDBotsPost, 1800000);
     }
     cback();
 });
