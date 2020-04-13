@@ -1,5 +1,6 @@
 # Pyro
 [![Discord][discord shield]][discord invite] [![Add me!][pyro add shield]][pyro invite]
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FTTtie%2FPyro.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FTTtie%2FPyro?ref=badge_shield)
 
 *Bring experience of Pyro from TF2 to your Discord server!*  
 The bot is written in JavaScript using [Node.js] and the [Sosamba] framework based on the [Eris] library.
@@ -14,3 +15,6 @@ The bot is written in JavaScript using [Node.js] and the [Sosamba] framework bas
 [Node.js]: https://nodejs.org
 [Eris]: https://github.com/abalabahaha/eris
 [Sosamba]: https://github.com/tt-bot-dev/sosamba
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FTTtie%2FPyro.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FTTtie%2FPyro?ref=badge_large)
