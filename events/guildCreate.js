@@ -1,5 +1,6 @@
 "use strict";
 const { Event } = require("sosamba");
+const { workerData: { SHARD_ID }} = require("worker_threads");
 class GuildJoinEvent extends Event {
     constructor(...args) {
         super(...args, {
