@@ -6,3 +6,5 @@ assets/icon/
 node_modules
 config.json*
 sounds
+package-lock.json
+yarn.lock
