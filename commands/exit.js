@@ -8,7 +8,7 @@ class DieCommand extends Command {
         });
     }
 
-    prerequisites(ctx) {
+    permissionCheck(ctx) {
         return ctx.author.id === "150628341316059136";
     }
 

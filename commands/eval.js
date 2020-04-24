@@ -10,11 +10,12 @@ class EvalCommand extends Command {
         });
     }
 
-    prerequisites(ctx) {
+    permissionCheck(ctx) {
         return ctx.author.id === "150628341316059136";
     }
 
     async run(ctx, args) {
+        this.log.log(args);
         let d;
         try {
             d = await new AsyncFunction("ctx", "args",
@@ -24,7 +25,7 @@ class EvalCommand extends Command {
             d = err.stack;
         }
         const v = typeof d === "string" ? d : inspect(d);
-        const description = `\`\`\`js\n${v}\n\`\`\``;
+        const description = `\`\`\`js\n${v.replace(this.sosamba.token, "not today")}\n\`\`\``;
         if (description.length > 2048) {
             await ctx.send({
                 embed: {
