@@ -37,5 +37,6 @@ sharder.IPC.on("sendGuilds", ({ id, guilds }, cback) => {
 sharder.IPC.on("die", (_, cb) => {
     sharder.broadcast("GOAWAY");
     cb();
+    setTimeout(() => process.exit(0), 10000);
 });
 sharder.start();
