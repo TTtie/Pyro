@@ -1,6 +1,6 @@
 FROM node:alpine
 
-RUN apk add ffmpeg
+RUN apk add ffmpeg git
 COPY . /app
 WORKDIR /app
 RUN npm i
