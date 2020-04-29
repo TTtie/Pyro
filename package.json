@@ -6,7 +6,7 @@
   "dependencies": {
     "chainfetch": "^1.2.2",
     "node-fetch": "^2.6.0",
-    "sosamba": "github:tt-bot-dev/sosamba",
+    "sosamba": "^1.0.1",
     "workers-as-promised": "github:tt-bot-dev/WorkersAsPromised"
   },
   "devDependencies": {
@@ -18,12 +18,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TTtie/Pyro-Bot.git"
+    "url": "git+https://github.com/TTtie/Pyro.git"
   },
   "author": "TTtie",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TTtie/Pyro-Bot/issues"
+    "url": "https://github.com/TTtie/Pyro/issues"
   },
-  "homepage": "https://github.com/TTtie/Pyro-Bot#readme"
+  "homepage": "https://github.com/TTtie/Pyro#readme"
 }
