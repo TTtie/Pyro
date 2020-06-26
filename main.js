@@ -22,6 +22,7 @@ sharder.IPC.on("ready", ({ id, guilds }, cback) => {
     guildDataMap.set(id, guilds);
     readyShards++;
     if (readyShards === shards) {
+        console.info("Connected to Discord!");
         doDBotsPost();
         setInterval(doDBotsPost, 1800000);
     }

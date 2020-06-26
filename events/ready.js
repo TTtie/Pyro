@@ -13,13 +13,17 @@ class ReadyEvent extends Event {
                 this.sosamba.options.log.level : undefined,
             name: "DBLPoster"
         });
+        this._rdy = false;
     }
 
     async run() {
-        await this.sosamba.IPC.send("ready", {
-            id: SHARD_ID,
-            guilds: this.sosamba.guilds.size
-        });
+        if (!this._rdy) {
+            await this.sosamba.IPC.send("ready", {
+                id: SHARD_ID,
+                guilds: this.sosamba.guilds.size
+            });
+            this._rdy = true;
+        }
         this.sosamba.editStatus("online", {
             name: `Type ${prefix}help | Shard ${SHARD_ID}`,
             type: 0
