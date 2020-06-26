@@ -11,6 +11,7 @@ const guildDataMap = new Map();
 let readyShards = 0;
 
 const doDBotsPost = () => {
+    console.info("Posting to DBots.");
     dbotsPost(Array.from(guildDataMap.values()).reduce((a, b) => a + b))
         .then(() => {
             console.info("Successfully posted to DBots!");

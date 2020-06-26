@@ -9,8 +9,6 @@ class GuildJoinEvent extends Event {
     }
 
     async run(guild) {
-        if (this.sosamba.listBotColls().includes(guild))
-            guild.leave();
         await this.sosamba.IPC.send("sendGuilds", {
             id: SHARD_ID,
             guilds: this.sosamba.guilds.size
