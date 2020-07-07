@@ -16,7 +16,7 @@ const doDBotsPost = () => {
         .then(() => {
             console.info("Successfully posted to DBots!");
         }).catch(console.error);
-}
+};
 
 sharder.IPC.on("ready", ({ id, guilds }, cback) => {
     console.info(`Shard ${id} is ready to serve ${guilds} guilds!`);
