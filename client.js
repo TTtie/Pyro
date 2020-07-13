@@ -16,7 +16,8 @@ const client = new Client(CLIENT_TOKEN, {
     maxShards: SHARD_COUNT,
     prefix,
     compress: true,
-    guildSubscriptions: false
+    intents: ["guilds", "guildMessages", "guildMessageReactions", "guildVoiceStates"],
+    messageLimit: 0,
 });
 
 client.IPC.on("GOAWAY", () => {
