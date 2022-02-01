@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:current-alpine
 
 RUN apk add git ffmpeg bash 
 
