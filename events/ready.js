@@ -32,6 +32,7 @@ class ReadyEvent extends Event {
             this._postInterval = setInterval(postToDBots, 3600_000);
             this._rdy = true;
         }
+        this.log.info(`Pyro is ready as ${this.sosamba.user.username}#${this.sosamba.user.discriminator}`);
         this.sosamba.editStatus("online", {
             name: `with the rainblower | v${version}`,
             type: 0
