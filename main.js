@@ -1,44 +1,28 @@
 "use strict";
-const { token, shards } = require("./config.json");
 const { Logger } = require("sosamba");
-const dbotsPost = require("./dbots");
+const { Colors } = require("sosamba/lib/Constants");
+Colors.SUCCESS = 0xFB524F;
+const { prefix, token } = require("./config.json");
 global.console = new Logger({
-    name: "Master"
+    name: "Console"
 });
-const sharderClass = require("./lib/sharding/sharder");
-const sharder = new sharderClass(token, shards);
-const guildDataMap = new Map();
-let readyShards = 0;
-
-const doDBotsPost = () => {
-    console.info("Posting to DBots.");
-    dbotsPost(Array.from(guildDataMap.values()).reduce((a, b) => a + b))
-        .then(() => {
-            console.info("Successfully posted to DBots!");
-        }).catch(console.error);
-};
-
-sharder.IPC.on("ready", ({ id, guilds }, cback) => {
-    console.info(`Shard ${id} is ready to serve ${guilds} guilds!`);
-    guildDataMap.set(id, guilds);
-    readyShards++;
-    if (readyShards === shards) {
-        console.info("Connected to Discord!");
-        doDBotsPost();
-        setInterval(doDBotsPost, 1800000);
-    }
-    cback();
+const Client = require("./lib/PyroClient");
+const client = new Client(token, {
+    prefix,
+    compress: true,
+    defaultImageFormat: "webp",
+    intents: ["guilds", "guildVoiceStates"],
+    messageLimit: 0,
 });
 
-sharder.IPC.on("sendGuilds", ({ id, guilds }, cback) => {
-    guildDataMap.set(id, guilds);
-    cback();
+client.connect();
+
+process.on("unhandledRejection", err => {
+    console.warn("Unhandled rejection!");
+    console.warn(err);
 });
 
-
-sharder.IPC.on("die", (_, cb) => {
-    sharder.broadcast("GOAWAY");
-    cb();
-    setTimeout(() => process.exit(0), 10000);
+process.on("uncaughtException", err => {
+    console.warn("Unhandled exception!");
+    console.warn(err);
 });
-sharder.start();

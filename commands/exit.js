@@ -1,10 +1,12 @@
 "use strict";
 const { Command } = require("sosamba");
+const { homeGuild } = require("../config.json");
 class DieCommand extends Command {
     constructor(...args) {
         super(...args, {
             name: "exit",
-            description: "Shuts Pyro down."
+            description: "Shuts Pyro down.",
+            registerIn: homeGuild
         });
     }
 
@@ -14,7 +16,9 @@ class DieCommand extends Command {
 
     async run(ctx) {
         await ctx.send(":wave:");
-        this.sosamba.IPC.send("die");
+        await this.sosamba.disconnect({
+            reconnect: false
+        });
     }
 }
 

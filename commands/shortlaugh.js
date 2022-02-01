@@ -9,7 +9,7 @@ class ShortLaughCommand extends Command {
     }
 
     async run(ctx) {
-        await Promise.all([
+        if (await this.canBeRun(ctx)) await Promise.all([
             this.playSound(ctx, "Pyro_laughshort01.wav"),
             ctx.send("mmmmph!!!")
         ]);

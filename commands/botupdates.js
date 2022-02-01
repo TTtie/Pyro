@@ -1,17 +1,20 @@
+"use strict";
 const { Command } = require("sosamba");
 const { announcementChannelID } = require("../config");
 
 class UpdateFollowCommand extends Command {
     constructor(...args) {
         super(...args, {
-            description: "Receive updates about Pyro in this channel. In order to run the command, you must be able to manage webhooks.",
+            description: "Receive updates about Pyro in this channel.",
             aliases: ["updates"],
             name: "botupdates"
         });
     }
 
     permissionCheck(ctx) {
-        return ctx.channel.permissionsOf(ctx.author.id).has("manageWebhooks");
+        if (ctx.channel.type !== 0) return false;
+        // The channel might not be cached (can happen if the guild has applied only application.commands)
+        return ctx.channel.permissionsOf?.(ctx.author.id)?.has("manageWebhooks");
     }
 
     async run(ctx) {

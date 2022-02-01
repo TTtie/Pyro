@@ -1,12 +1,20 @@
 "use strict";
-const { Command } = require("sosamba");
+const { Command, Eris: { Constants : { ApplicationCommandOptionTypes } } } = require("sosamba");
 const { inspect } = require("util");
+const { homeGuild } = require("../config.json");
 const AsyncFunction = (async () => "").constructor;
 class EvalCommand extends Command {
     constructor(sosamba, ...args) {
         super(sosamba, ...args, {
             name: "eval",
-            description: "Evaluates JavaScript code."
+            description: "Evaluates JavaScript code.",
+            args: [{
+                name: "code",
+                description: "The code to evaluate",
+                type: ApplicationCommandOptionTypes.STRING,
+                required: true
+            }],
+            registerIn: homeGuild
         });
     }
 
@@ -14,7 +22,7 @@ class EvalCommand extends Command {
         return ctx.author.id === "150628341316059136";
     }
 
-    async run(ctx, args) {
+    async run(ctx, { code: args }) {
         this.log.log(args);
         let d;
         try {

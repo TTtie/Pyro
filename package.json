@@ -1,17 +1,15 @@
 {
   "name": "pyro-bot",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Pyro Bot for Discord",
   "main": "main.js",
   "dependencies": {
-    "chainfetch": "^1.2.2",
-    "node-fetch": "^2.6.0",
-    "sosamba": "^1.0.1",
-    "workers-as-promised": "github:tt-bot-dev/WorkersAsPromised"
+    "sosamba": "git+https://owo.codes/tt.bot/frameworks/sosamba#v2.0.0",
+    "undici": "^4.10.3"
   },
   "devDependencies": {
-    "@tt-bot-dev/eslint-config": "^1.0.2",
-    "eslint": "^6.8.0"
+    "@tt-bot-dev/eslint-config": "git+https://owo.codes/tt.bot/frameworks/eslint-config.git",
+    "eslint": "^8.5.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

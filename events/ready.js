@@ -1,31 +1,39 @@
 "use strict";
 const { Event, Logger } = require("sosamba");
-const { workerData: { SHARD_ID } } = require("worker_threads");
-const { prefix } = require("../config.json");
+const { version } = require("../package.json");
+const postToDBots = require("../dbots");
 
 class ReadyEvent extends Event {
+    posterLog = new Logger({
+        level: this.sosamba.options.log?.level ?? undefined,
+        name: "DBLPoster"
+    });
+
+    _rdy = false;
+    _postInterval;
+
     constructor(...args) {
         super(...args, {
             name: "ready"
         });
-        this.posterLog = new Logger({
-            level: this.sosamba.options.log && this.sosamba.options.log.level ?
-                this.sosamba.options.log.level : undefined,
-            name: "DBLPoster"
-        });
-        this._rdy = false;
+    }
+
+    async _postToDBots() {
+        return postToDBots(this.sosamba.guilds.size)
+            .then(() => this.posterLog.info("Successfully posted to DBots."))
+            .catch(err => {
+                this.posterLog.error("Posting to DBots has failed :(");
+                this.posterLog.error(err);
+            });
     }
 
     async run() {
         if (!this._rdy) {
-            await this.sosamba.IPC.send("ready", {
-                id: SHARD_ID,
-                guilds: this.sosamba.guilds.size
-            });
+            this._postInterval = setInterval(postToDBots, 3600_000);
             this._rdy = true;
         }
         this.sosamba.editStatus("online", {
-            name: `Type ${prefix}help | Shard ${SHARD_ID}`,
+            name: `with the rainblower | v${version}`,
             type: 0
         });
     }

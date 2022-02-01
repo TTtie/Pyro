@@ -1,20 +1,24 @@
 "use strict";
 const Command = require("../lib/VoiceBasedCommand");
-const VoiceLineParser = require("../lib/VoiceLineParser");
+const { BaseVoiceLineStruct, makeChoices } = require("../lib/utils");
 
 class EvilLaughCommand extends Command {
     constructor(sosamba, ...args) {
         super(sosamba, ...args, {
             name: "evillaugh",
-            args: "[1-4]",
-            argParser: new VoiceLineParser(sosamba, {
-                voiceLineName: "Pyro_laughevil0{{LINE_ID}}.wav"
-            })
+            args: [
+                {
+                    ...BaseVoiceLineStruct,
+                    choices: makeChoices("Pyro_laughevil0{{LINE_ID}}.wav", 4)
+                }
+            ]
         });
     }
 
-    async run(ctx, voiceFile) {
-        await Promise.all([
+    async run(ctx, {
+        voice_line: voiceFile
+    }) {
+        if (await this.canBeRun(ctx)) await Promise.all([
             this.playSound(ctx, voiceFile),
             ctx.send("*mmmmmmph!*")
         ]);
