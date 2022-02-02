@@ -29,8 +29,8 @@ class ReadyEvent extends Event {
 
     async run() {
         if (!this._rdy) {
-            this._postInterval = setInterval(postToDBots, 3600_000);
-            await postToDBots();
+            this._postInterval = setInterval(this._postToDBots, 3600_000);
+            await this._postToDBots();
             this._rdy = true;
         }
         this.log.info(`Pyro is ready as ${this.sosamba.user.username}#${this.sosamba.user.discriminator}`);
