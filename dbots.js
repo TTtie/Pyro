@@ -15,7 +15,9 @@ module.exports = guilds => {
         })
     }).then(res => {
         if (res.statusCode !== 200) {
-            throw new Error("Sending the guild count has failed");
+            return res.body.text().then(data => {
+                throw new Error(`Sending the guild count has failed\n${res.statusCode}\nData returned by the API: ${data}`);
+            });
         } else {
             return res.body.json();
         }
