@@ -29,7 +29,7 @@ class AboutCommand extends Command {
                     value: "[Support server](https://discord.gg/pGN5dMq)\n[Source code](https://github.com/tttie/pyro)\n[Privacy policy](https://tttie.cz/privacy/pyro.html)",
                 }],
                 footer: {
-                    text: "We're not affliated with Valve Corp."
+                    text: "We're not affiliated with Valve Corp."
                 },
                 color: 0xFB524F
             }]
