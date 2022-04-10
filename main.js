@@ -1,6 +1,6 @@
 "use strict";
 const { Logger } = require("sosamba");
-const { Colors } = require("sosamba/lib/Constants");
+const { Colors } = require("sosamba/lib/Constants.js");
 Colors.SUCCESS = 0xFB524F;
 const { prefix, token } = require("./config.json");
 global.console = new Logger({
