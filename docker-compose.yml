@@ -6,3 +6,5 @@ services:
         environment: 
             NODE_ENV: production
         restart: always
+        volumes:
+            - ./config.json:/app/config.json
