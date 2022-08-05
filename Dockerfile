@@ -1,12 +1,14 @@
-FROM node:current-alpine
+FROM docker.io/library/node:current-alpine
 
-RUN apk add git ffmpeg bash 
+RUN apk add ffmpeg
 
 ENV HOME /app
 COPY ./package.json /app/package.json
 WORKDIR /app
-RUN npm install --only=production
+RUN apk add --no-cache --virtual .build-deps git bash && \
+    npm install --only=production && \
+    apk del .build-deps
 COPY . /app
 USER nobody
 
-CMD ["node", "main.js"]
+CMD ["node", "."]
