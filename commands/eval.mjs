@@ -25,7 +25,7 @@ class EvalCommand extends Command {
     }
 
     async run(ctx, { code: args }) {
-        this.log.log(args);
+        await ctx.interaction.defer();
         let d;
         try {
             d = await new AsyncFunction("ctx", "args", "importMeta", args)
@@ -45,7 +45,7 @@ class EvalCommand extends Command {
             });
             this.log.log(v);
         } else {
-            ctx.send({
+            await ctx.send({
                 embed: {
                     description,
                     color: 0xFB524F,
