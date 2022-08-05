@@ -1,6 +1,9 @@
 {
     "extends": "@tt-bot-dev",
-    "rules": {
-        "no-console": "off"
-    }
+    "overrides": [{
+        "files": "*.mjs",
+        "parserOptions": {
+            "sourceType": "module"
+        }
+    }]
 }
