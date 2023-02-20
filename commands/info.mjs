@@ -1,6 +1,6 @@
-import { Command, Eris } from "sosamba";
+import { Command, Dysnomia } from "sosamba";
 import { sosambaPackage } from "../lib/package.mjs";
-const { VERSION: erisVersion } = Eris;
+const { VERSION: erisVersion } = Dysnomia;
 const { version: sosambaVersion } = sosambaPackage;
 
 class AboutCommand extends Command {
@@ -21,7 +21,7 @@ class AboutCommand extends Command {
                 description: "Made by <@150628341316059136> (TTtie#1381)",
                 fields: [{
                     name: "Info",
-                    value: `Servers: ${this.sosamba.guilds.size}\nRunning on Sosamba v${sosambaVersion} (Eris v${erisVersion}; Node.js v${process.versions.node})`,
+                    value: `Servers: ${this.sosamba.guilds.size}\nRunning on Sosamba v${sosambaVersion} (Dysnomia v${erisVersion}; Node.js v${process.versions.node})`,
                 }, {
                     name: "Invite me",
                     value: `https://discord.com/oauth2/authorize?client_id=${this.sosamba.application.id}&scope=bot+applications.commands`,

@@ -8,9 +8,11 @@ if (!inspector.url()) globalThis.console = new Logger({
 });
 
 const client = new Client(token, {
-    compress: true,
     defaultImageFormat: "webp",
-    intents: ["guilds", "guildVoiceStates"],
+    gateway: {
+        compress: true,
+        intents: ["guilds", "guildVoiceStates"],
+    },
     messageLimit: 0,
 });
 

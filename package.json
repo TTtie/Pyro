@@ -1,15 +1,16 @@
 {
   "name": "pyro-bot",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Pyro Bot for Discord",
   "main": "main.mjs",
   "dependencies": {
+    "@projectdysnomia/dysnomia": "github:projectdysnomia/dysnomia#0df1369a822dba8851c667b22d5bac34f4e849e6",
     "sosamba": "git+https://owo.codes/tt.bot/frameworks/sosamba#v2.0.0",
-    "undici": "^5.8.1"
+    "undici": "^5.20.0"
   },
   "devDependencies": {
     "@tt-bot-dev/eslint-config": "git+https://owo.codes/tt.bot/frameworks/eslint-config.git",
-    "eslint": "^8.21.0"
+    "eslint": "^8.34.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -34,7 +34,7 @@ class EvalCommand extends Command {
             d = err.stack;
         }
         const v = typeof d === "string" ? d : inspect(d);
-        const description = `\`\`\`js\n${v.replace(this.sosamba.token, "not today")}\n\`\`\``;
+        const description = `\`\`\`js\n${v.replaceAll(this.sosamba._token, "not today")}\n\`\`\``;
         if (description.length > 2048) {
             await ctx.send({
                 embed: {
