@@ -37,19 +37,19 @@ class EvalCommand extends Command {
         const description = `\`\`\`js\n${v.replaceAll(this.sosamba._token, "not today")}\n\`\`\``;
         if (description.length > 2048) {
             await ctx.send({
-                embed: {
+                embeds: [{
                     title: "Evaluated!",
                     color: 0xFB524F,
                     description: "Unfortunately, we can't provide the data here because they're too long.\nThereby, the output has been logged in the console.",
-                },
+                }],
             });
             this.log.log(v);
         } else {
             await ctx.send({
-                embed: {
+                embeds: [{
                     description,
                     color: 0xFB524F,
-                },
+                }],
             });
         }
     }
