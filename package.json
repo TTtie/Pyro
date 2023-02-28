@@ -1,10 +1,10 @@
 {
   "name": "pyro-bot",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Pyro Bot for Discord",
   "main": "main.mjs",
   "dependencies": {
-    "@projectdysnomia/dysnomia": "github:projectdysnomia/dysnomia#0df1369a822dba8851c667b22d5bac34f4e849e6",
+    "@projectdysnomia/dysnomia": "github:projectdysnomia/dysnomia#634349c884d77004b6ef9a7813c9739c43a3b27e",
     "sosamba": "git+https://owo.codes/tt.bot/frameworks/sosamba#v2.0.0",
     "undici": "^5.20.0"
   },
