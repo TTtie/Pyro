@@ -4,7 +4,7 @@
   "description": "Pyro Bot for Discord",
   "main": "main.mjs",
   "dependencies": {
-    "@projectdysnomia/dysnomia": "github:projectdysnomia/dysnomia#634349c884d77004b6ef9a7813c9739c43a3b27e",
+    "@projectdysnomia/dysnomia": "github:projectdysnomia/dysnomia#896418b630478818e944dc885900ae5462195efe",
     "sosamba": "git+https://owo.codes/tt.bot/frameworks/sosamba#v2.0.0",
     "undici": "^5.20.0"
   },
