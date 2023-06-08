@@ -18,7 +18,7 @@ class AboutCommand extends Command {
                     name: "About Pyro Bot",
                     icon_url: this.sosamba.user.avatarURL,
                 },
-                description: "Made by <@150628341316059136> (TTtie#1381)",
+                description: "Made by <@150628341316059136> (@tttie)",
                 fields: [{
                     name: "Info",
                     value: `Servers: ${this.sosamba.guilds.size}\nRunning on Sosamba v${sosambaVersion} (Dysnomia v${erisVersion}; Node.js v${process.versions.node})`,
