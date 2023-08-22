@@ -4,13 +4,13 @@
   "description": "Pyro Bot for Discord",
   "main": "main.mjs",
   "dependencies": {
-    "@projectdysnomia/dysnomia": "^0.1.2",
+    "@projectdysnomia/dysnomia": "^0.1.3",
     "sosamba": "git+https://owo.codes/tt.bot/frameworks/sosamba.git#3e1635a47841353dce24c779c2f1d6b24bbec5d6",
-    "undici": "^5.22.1"
+    "undici": "^5.23.0"
   },
   "devDependencies": {
     "@tt-bot-dev/eslint-config": "git+https://owo.codes/tt.bot/frameworks/eslint-config.git",
-    "eslint": "^8.34.0"
+    "eslint": "^8.47.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
