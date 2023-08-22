@@ -37,8 +37,9 @@ class ReadyEvent extends Event {
         }
         this.log.info(`Pyro is ready as ${this.sosamba.user.username}#${this.sosamba.user.discriminator}`);
         this.sosamba.editStatus("online", {
-            name: `with the rainblower | v${version}`,
+            name: "with the rainblower",
             type: 0,
+            state: `v${version}`,
         });
     }
 }
