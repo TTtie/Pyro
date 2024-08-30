@@ -12,6 +12,7 @@ const client = new Client(token, {
     gateway: {
         compress: true,
         intents: ["guilds", "guildVoiceStates"],
+        maxShards: "auto",
     },
     messageLimit: 0,
 });
