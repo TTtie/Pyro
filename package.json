@@ -5,8 +5,8 @@
   "main": "main.mjs",
   "dependencies": {
     "@projectdysnomia/dysnomia": "^0.2.0",
-    "sosamba": "git+https://owo.codes/tt.bot/frameworks/sosamba.git#3e1635a47841353dce24c779c2f1d6b24bbec5d6",
-    "undici": "^6.19.8"
+    "sosamba": "git+https://owo.codes/tt.bot/frameworks/sosamba.git#b7df80d10d4cec3ac052bcb0db89907f2453366a",
+    "undici": "^6.21.0"
   },
   "devDependencies": {
     "@tt-bot-dev/eslint-config": "git+https://owo.codes/tt.bot/frameworks/eslint-config.git",
