@@ -8,3 +8,4 @@ config.json*
 sounds
 package-lock.json
 yarn.lock
+.idea
