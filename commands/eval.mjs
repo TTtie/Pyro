@@ -1,5 +1,5 @@
-import { Command, Eris } from "sosamba";
-const { Constants: { ApplicationCommandOptionTypes } } = Eris;
+import { Command, Dysnomia } from "sosamba";
+const { Constants: { ApplicationCommandOptionTypes, MessageFlags, ComponentTypes } } = Dysnomia;
 import { inspect } from "util";
 import config from "../lib/config.mjs";
 
@@ -34,22 +34,57 @@ class EvalCommand extends Command {
             d = err.stack;
         }
         const v = typeof d === "string" ? d : inspect(d);
-        const description = `\`\`\`js\n${v.replaceAll(this.sosamba._token, "not today")}\n\`\`\``;
+        const result = v.replaceAll(this.sosamba._token, "not today");
+        const description = `\`\`\`js\n${result}\n\`\`\``;
         if (description.length > 2048) {
             await ctx.send({
-                embeds: [{
-                    title: "Evaluated!",
-                    color: 0xFB524F,
-                    description: "Unfortunately, we can't provide the data here because they're too long.\nThereby, the output has been logged in the console.",
-                }],
+                flags: MessageFlags.IS_COMPONENTS_V2,
+                components: [
+                    {
+                        type: ComponentTypes.CONTAINER,
+                        components: [
+                            {
+                                type: ComponentTypes.TEXT_DISPLAY,
+                                content: "# Evaluated!" +
+                                    "\nThe result was too long to be sent as a message. The result has been saved as an attachment.",
+                            },
+                            {
+                                type: ComponentTypes.FILE,
+                                file: {
+                                    url: "attachment://eval.txt",
+                                },
+                            },
+                        ],
+                        accent_color: 0xFB524F,
+                    },
+                ],
+                attachments: [
+                    {
+                        filename: "eval.txt",
+                        file: Buffer.from(result),
+                    },
+                ],
             });
             this.log.log(v);
         } else {
             await ctx.send({
-                embeds: [{
-                    description,
-                    color: 0xFB524F,
-                }],
+                flags: MessageFlags.IS_COMPONENTS_V2,
+                components: [
+                    {
+                        type: ComponentTypes.CONTAINER,
+                        components: [
+                            {
+                                type: ComponentTypes.TEXT_DISPLAY,
+                                content: "# Evaluated!",
+                            },
+                            {
+                                type: ComponentTypes.TEXT_DISPLAY,
+                                content: description,
+                            },
+                        ],
+                        accent_color: 0xFB524F,
+                    },
+                ],
             });
         }
     }

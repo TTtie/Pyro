@@ -1,7 +1,7 @@
-import { Command, Eris } from "sosamba";
+import { Command, Dysnomia } from "sosamba";
 import config from "../lib/config.mjs";
 
-const { Constants: { ChannelTypes } } = Eris;
+const { Constants: { ChannelTypes, MessageFlags, ComponentTypes } } = Dysnomia;
 const { announcementChannelID } = config;
 
 class UpdateFollowCommand extends Command {
@@ -19,14 +19,24 @@ class UpdateFollowCommand extends Command {
     }
 
     async run(ctx) {
-        if (!ctx.sosamba.hasBotPermission(ctx.channel, "manageWebhooks")) {
+        if (!ctx.channel.permissionsOf(ctx.sosamba.user.id).has("manageWebhooks")) {
             await ctx.send({
-                embeds: [{
-                    title: ":x: Missing Permissions",
-                    description: "I need to be able to manage webhooks in this channel in order to set up bot updates. After that, you can feel free to remove it from me.",
-                    color: 0xff0000,
-                }],
+                flags: MessageFlags.IS_COMPONENTS_V2,
+                components: [
+                    {
+                        type: ComponentTypes.CONTAINER,
+                        components: [
+                            {
+                                type: ComponentTypes.TEXT_DISPLAY,
+                                content: "# :x: Missing Permissions" +
+                                    "\nI need to be able to manage webhooks in this channel in order to set up bot updates. After that, you can feel free to remove it from me.",
+                            },
+                        ],
+                        accent_color: 0xff0000,
+                    },
+                ],
             });
+
             return;
         }
 
