@@ -8,10 +8,10 @@ class CompWinCommand extends Command {
     }
 
     async run(ctx) {
-        if (await this.canBeRun(ctx)) await Promise.all([
-            this.playSound(ctx, "Cm_pyro_pregamewonlast_01.mp3"),
-            ctx.send("*m mph!*"),
-        ]);
+        if (await this.canBeRun(ctx)) {
+            await ctx.send("*m mph!*");
+            await this.playSound(ctx, "Cm_pyro_pregamewonlast_01.mp3");
+        }
     }
 }
 

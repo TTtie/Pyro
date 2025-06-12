@@ -8,10 +8,10 @@ class IntelligenceCaptureCommand extends Command {
     }
 
     async run(ctx) {
-        if (await this.canBeRun(ctx)) await Promise.all([
-            this.playSound(ctx, "Pyro_autocappedintelligence01.wav"),
-            ctx.send("mmmmmmmmmmph mmmmmmph!"),
-        ]);
+        if (await this.canBeRun(ctx)) {
+            await ctx.send("mmmmmmmmmmph mmmmmmph!");
+            await this.playSound(ctx, "Pyro_autocappedintelligence01.wav");
+        }
     }
 }
 

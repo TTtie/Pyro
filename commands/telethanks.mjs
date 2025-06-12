@@ -8,10 +8,10 @@ class TeleporterThanksCommand extends Command {
     }
 
     async run(ctx) {
-        if (await this.canBeRun(ctx)) await Promise.all([
-            this.playSound(ctx, "Pyro_thanksfortheteleporter01.wav"),
-            ctx.send("*mmmph mph.*"),
-        ]);
+        if (await this.canBeRun(ctx)) {
+            await ctx.send("*mmmph mph.*");
+            await this.playSound(ctx, "Pyro_thanksfortheteleporter01.wav");
+        }
     }
 }
 

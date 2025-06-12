@@ -8,10 +8,10 @@ class UberchargeActivateCommand extends Command {
     }
 
     async run(ctx) {
-        if (await this.canBeRun(ctx)) await Promise.all([
-            this.playSound(ctx, "Pyro_activatecharge01.wav"),
-            ctx.send("*mmph*"),
-        ]);
+        if (await this.canBeRun(ctx)) {
+            await ctx.send("*mmph*");
+            await this.playSound(ctx, "Pyro_activatecharge01.wav");
+        }
     }
 }
 

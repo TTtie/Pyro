@@ -17,10 +17,10 @@ class HighFiveCommand extends Command {
     async run(ctx, {
         voice_line: voiceFile,
     }) {
-        await Promise.all([
-            this.playSound(ctx, voiceFile),
-            ctx.send("*mmph mmph mph!*"),
-        ]);
+        if (await this.canBeRun(ctx)) {
+            await ctx.send("*mmph mmph mph!*");
+            await this.playSound(ctx, voiceFile);
+        }
     }
 }
 

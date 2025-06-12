@@ -17,10 +17,10 @@ class CompLoseCommand extends Command {
     async run(ctx, {
         voice_line: voiceFile,
     }) {
-        if (await this.canBeRun(ctx)) await Promise.all([
-            this.playSound(ctx, voiceFile),
-            ctx.send("*m ph*"),
-        ]);
+        if (await this.canBeRun(ctx)) {
+            await ctx.send("*m ph*");
+            await this.playSound(ctx, voiceFile);
+        }
     }
 }
 

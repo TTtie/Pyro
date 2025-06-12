@@ -8,10 +8,10 @@ class CallForCaptureHelpCommand extends Command {
     }
 
     async run(ctx) {
-        if (await this.canBeRun(ctx)) await Promise.all([
-            this.playSound(ctx, "Pyro_helpmecapture01.wav"),
-            ctx.send("*MMPH MPH MMMMMPH!*"),
-        ]);
+        if (await this.canBeRun(ctx)) {
+            await ctx.send("*MMPH MPH MMMMMPH!*");
+            await this.playSound(ctx, "Pyro_helpmecapture01.wav");
+        }
     }
 }
 

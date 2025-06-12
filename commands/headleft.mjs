@@ -8,10 +8,10 @@ class HeadLeftCommand extends Command {
     }
 
     async run(ctx) {
-        if (await this.canBeRun(ctx)) await Promise.all([
-            this.playSound(ctx, "Pyro_headleft01.wav"),
-            ctx.send("*MMPH MMPH!*"),
-        ]);
+        if (await this.canBeRun(ctx)) {
+            await ctx.send("*MMPH MMPH!*");
+            await this.playSound(ctx, "Pyro_headleft01.wav");
+        }
     }
 }
 

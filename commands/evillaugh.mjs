@@ -17,10 +17,10 @@ class EvilLaughCommand extends Command {
     async run(ctx, {
         voice_line: voiceFile,
     }) {
-        if (await this.canBeRun(ctx)) await Promise.all([
-            this.playSound(ctx, voiceFile),
-            ctx.send("*mmmmmmph!*"),
-        ]);
+        if (await this.canBeRun(ctx)) {
+            await ctx.send("*mmmmmmph!*");
+            await this.playSound(ctx, voiceFile);
+        }
     }
 }
 

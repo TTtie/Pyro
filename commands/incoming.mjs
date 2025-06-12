@@ -8,10 +8,10 @@ class IncomingCommand extends Command {
     }
 
     async run(ctx) {
-        if (await this.canBeRun(ctx)) await Promise.all([
-            this.playSound(ctx, "Pyro_sentryahead01.wav"),
-            ctx.send("mmmmph mmmph!!!"),
-        ]);
+        if (await this.canBeRun(ctx)) {
+            await ctx.send("mmmmph mmmph!!!");
+            await this.playSound(ctx, "Pyro_incoming01.wav");
+        }
     }
 }
 

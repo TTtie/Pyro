@@ -8,10 +8,10 @@ class StayOnPointCommand extends Command {
     }
 
     async run(ctx) {
-        if (await this.canBeRun(ctx)) await Promise.all([
-            this.playSound(ctx, "Pyro_standonthepoint01.wav"),
-            ctx.send("*MMPH MM MPH MMMPH MPH!!!!*"),
-        ]);
+        if (await this.canBeRun(ctx)) {
+            await ctx.send("*MMPH MM MPH MMMPH MPH!!!!*");
+            await this.playSound(ctx, "Pyro_standonthepoint01.wav");
+        }
     }
 }
 

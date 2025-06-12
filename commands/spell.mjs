@@ -17,10 +17,10 @@ class SpellCommand extends Command {
     async run(ctx, {
         voice_line: voiceFile,
     }) {
-        if (await this.canBeRun(ctx)) await Promise.all([
-            this.playSound(ctx, voiceFile),
-            ctx.send("*mmmmmph mmmph*"),
-        ]);
+        if (await this.canBeRun(ctx)) {
+            await ctx.send("*mmmmmph mmmph*");
+            await this.playSound(ctx, voiceFile);
+        }
     }
 }
 

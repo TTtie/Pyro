@@ -8,10 +8,10 @@ class SpecialCompletedWithAssistanceCommand extends Command {
     }
 
     async run(ctx) {
-        if (await this.canBeRun(ctx)) await Promise.all([
-            this.playSound(ctx, "Pyro_specialcompleted-assistedkill01.wav"),
-            ctx.send("*mmmmmph*"),
-        ]);
+        if (await this.canBeRun(ctx)) {
+            await ctx.send("*mmmmmph*");
+            await this.playSound(ctx, "Pyro_specialcompleted-assistedkill01.wav");
+        }
     }
 }
 

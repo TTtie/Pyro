@@ -8,10 +8,10 @@ class SentryAheadCommand extends Command {
     }
 
     async run(ctx) {
-        if (await this.canBeRun(ctx)) await Promise.all([
-            this.playSound(ctx, "Pyro_incoming01.wav"),
-            ctx.send("mmmmmmph!!!"),
-        ]);
+        if (await this.canBeRun(ctx)) {
+            await ctx.send("mmmmmmph!!!");
+            await this.playSound(ctx, "Pyro_sentryahead01.wav");
+        }
     }
 }
 
